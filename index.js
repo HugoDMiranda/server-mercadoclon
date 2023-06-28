@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://mercado-clon.vercel.app"],
+    origin: ["http://localhost:3000", "https://mercadoclonapp.vercel.app/"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
