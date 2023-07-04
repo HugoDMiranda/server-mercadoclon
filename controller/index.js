@@ -11,11 +11,12 @@ class ProductosService {
   }
 
   async buscar(url) {
-    const limit = 4;
+    const limit = 8;
+    //const limit = 4;
     const resultados = await this.obtenerDatos(url);
 
     const productos = [];
-    for (let index = 0; index < limit; index++) {
+    for (let index = 0; index < resultados.results.length; index++) {
       const categoriesId = resultados.results[index].category_id;
       const categories = await this.obtenerDatos(
         `https://api.mercadolibre.com/categories/${categoriesId}`
