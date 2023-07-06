@@ -18,6 +18,11 @@ app.use(
 
 //routes
 app.use("/api", require("./api/index"));
+app.get("/", (req, res) => {
+  res.json({
+    message: "MercadoClon server is running",
+  });
+});
 
 // starting the server
 app.listen(app.get("port"), () => {

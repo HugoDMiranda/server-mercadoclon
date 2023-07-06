@@ -11,12 +11,12 @@ class ProductosService {
   }
 
   async buscar(url) {
-    const limit = 8;
+    const limit = 12;
     //const limit = 4;
     const resultados = await this.obtenerDatos(url);
 
     const productos = [];
-    for (let index = 0; index < resultados.results.length; index++) {
+    for (let index = 0; index < limit; index++) {
       const categoriesId = resultados.results[index].category_id;
       const categories = await this.obtenerDatos(
         `https://api.mercadolibre.com/categories/${categoriesId}`
@@ -61,12 +61,16 @@ class ProductosService {
 
     const authorId = data1.seller_id;
     const currencyId = data1.currency_id;
+    const categoryId = data1.category_id;
 
     const author = await this.obtenerDatos(
       `https://api.mercadolibre.com/users/${authorId}`
     );
     const currency = await this.obtenerDatos(
       `https://api.mercadolibre.com/currencies/${currencyId}`
+    );
+    const categories = await this.obtenerDatos(
+      `https://api.mercadolibre.com/categories/${categoryId}`
     );
 
     const producto = {
@@ -83,12 +87,15 @@ class ProductosService {
           decimals: currency.decimal_places,
           price: data1.price,
         },
-        picture: data1.thumbnail,
+        picture: data1.pictures[0].url,
         condition: data1.condition,
         free_shipping: data1.shipping.free_shipping,
         sold_quantity: data1.sold_quantity,
         description: data2.plain_text,
       },
+      categories: categories.path_from_root.map((category) => {
+        return category.name;
+      }),
     };
     return producto;
   }
