@@ -19,6 +19,20 @@ router.get("/items", async (req, res) => {
 });
 // http://localhost:3001/api/items/prueba?search=television
 
+router.get("/items/:search", async (req, res) => {
+  try {
+    const { search } = req.params;
+    const url = `https://api.mercadolibre.com/sites/MLA/search?q=${search}`;
+    const productos = await service.buscar(url);
+
+    res.json(productos);
+  } catch (error) {
+    res.json({
+      message: "error",
+    });
+  }
+});
+
 router.get("/items/:id", async (req, res) => {
   try {
     const { id } = req.params;
