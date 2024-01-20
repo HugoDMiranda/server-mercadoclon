@@ -19,37 +19,37 @@ class ProductosService {
 
     const productos = [];
     for (let index = 0; index < limit; index++) {
-      const categoriesId = resultados.results[index].category_id;
+      const categoriesId = resultados?.results[index]?.category_id;
       const categories = await this.obtenerDatos(
         `https://api.mercadolibre.com/categories/${categoriesId}`
       );
-      const currencyId = resultados.results[index].currency_id;
+      const currencyId = resultados?.results[index]?.currency_id;
       const currency = await this.obtenerDatos(
         `https://api.mercadolibre.com/currencies/${currencyId}`
       );
 
       productos.push({
         author: {
-          name: resultados.results[index].seller.nickname,
+          name: resultados?.results[index]?.seller.nickname,
           lastname: String,
         },
-        categories: categories.path_from_root.map((category) => {
+        categories: categories?.path_from_root.map((category) => {
           return category.name;
         }),
         items: [
           {
-            id: resultados.results[index].id,
-            title: resultados.results[index].title,
+            id: resultados?.results[index]?.id,
+            title: resultados?.results[index]?.title,
             price: {
               currency: currency.id,
-              amount: resultados.results[index].installments.amount,
-              decimals: currency.decimal_places,
-              price: resultados.results[index].price,
+              amount: resultados?.results[index]?.installments.amount,
+              decimals: currency?.decimal_places,
+              price: resultados?.results[index]?.price,
             },
-            picture: resultados.results[index].thumbnail,
-            condition: resultados.results[index].condition,
-            free_shipping: resultados.results[index].shipping.free_shipping,
-            state_name: resultados.results[index].address.state_name,
+            picture: resultados?.results[index]?.thumbnail,
+            condition: resultados?.results[index]?.condition,
+            free_shipping: resultados?.results[index]?.shipping.free_shipping,
+            state_name: resultados?.results[index]?.address.state_name,
           },
         ],
       });
@@ -156,7 +156,20 @@ class ProductosService {
     //const limit = 4;
     const resultados = await this.obtenerDatos(url);
 
-    return resultados;
+    const productos = [];
+
+    const categoriesId = resultados?.results[index]?.category_id;
+    const categories = await this.obtenerDatos(
+      `https://api.mercadolibre.com/categories/${categoriesId}`
+    );
+    const currencyId = resultados?.results[index]?.currency_id;
+    const currency = await this.obtenerDatos(
+      `https://api.mercadolibre.com/currencies/${currencyId}`
+    );
+
+    productos.push(categories, currency);
+
+    return productos;
   }
 }
 
