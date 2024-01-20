@@ -4,6 +4,7 @@ const ProductosService = require("../controller/index");
 const router = Router();
 const service = new ProductosService();
 
+//BUSCAR PRODUCTOS
 router.get("/items", async (req, res) => {
   try {
     const search = req.query.search;
@@ -14,26 +15,28 @@ router.get("/items", async (req, res) => {
   } catch (error) {
     res.json({
       message: "error",
-      error,
     });
   }
 });
 // http://localhost:3001/api/items/prueba?search=television
 
+//PRUEBA
+
 router.get("/items/search/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const url = `https://api.mercadolibre.com/sites/MLA/search?q=${id}`;
-    const productos = await service.buscar(url);
+    const productos = await service.search(url);
 
     res.json(productos);
   } catch (error) {
     res.json({
       message: "error",
-      error,
     });
   }
 });
+
+//BUSCAR UN PRODUCTO
 
 router.get("/items/:id", async (req, res) => {
   try {
