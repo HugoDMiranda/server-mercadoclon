@@ -14,6 +14,7 @@ router.get("/items", async (req, res) => {
   } catch (error) {
     res.json({
       message: "error",
+      error,
     });
   }
 });
@@ -29,6 +30,7 @@ router.get("/items/search/:id", async (req, res) => {
   } catch (error) {
     res.json({
       message: "error",
+      error,
     });
   }
 });
