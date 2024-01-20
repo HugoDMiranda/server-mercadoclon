@@ -211,7 +211,7 @@ class ProductosService {
               price: resultados?.results[index]?.price,
             },
             picture: resultados?.results[index]?.thumbnail,
-            // condition: resultados?.results[index]?.condition,
+            condition: resultados?.results[index]?.condition,
             // free_shipping: resultados?.results[index]?.shipping.free_shipping,
             // state_name: resultados?.results[index]?.address.state_name,
           },
