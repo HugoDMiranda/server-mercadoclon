@@ -202,8 +202,8 @@ class ProductosService {
         }),
         items: [
           {
-            // id: resultados?.results[index]?.id,
-            // title: resultados?.results[index]?.title,
+            id: resultados?.results[index]?.id,
+            title: resultados?.results[index]?.title,
             price: {
               currency: currency.id,
               amount: resultados?.results[index]?.installments.amount,
