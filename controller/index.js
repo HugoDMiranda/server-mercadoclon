@@ -202,18 +202,18 @@ class ProductosService {
         }),
         items: [
           {
-            id: resultados?.results[index]?.id,
-            title: resultados?.results[index]?.title,
-            // price: {
-            //   currency: currency.id,
-            //   amount: resultados?.results[index]?.installments.amount,
-            //   decimals: currency?.decimal_places,
-            //   price: resultados?.results[index]?.price,
-            // },
-            picture: resultados?.results[index]?.thumbnail,
-            condition: resultados?.results[index]?.condition,
-            free_shipping: resultados?.results[index]?.shipping.free_shipping,
-            state_name: resultados?.results[index]?.address.state_name,
+            // id: resultados?.results[index]?.id,
+            // title: resultados?.results[index]?.title,
+            price: {
+              currency: currency.id,
+              amount: resultados?.results[index]?.installments.amount,
+              decimals: currency?.decimal_places,
+              price: resultados?.results[index]?.price,
+            },
+            // picture: resultados?.results[index]?.thumbnail,
+            // condition: resultados?.results[index]?.condition,
+            // free_shipping: resultados?.results[index]?.shipping.free_shipping,
+            // state_name: resultados?.results[index]?.address.state_name,
           },
         ],
       });
