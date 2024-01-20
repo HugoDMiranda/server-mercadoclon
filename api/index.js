@@ -13,8 +13,10 @@ router.get("/items", async (req, res) => {
 
     res.json(productos);
   } catch (error) {
+    const search = req.query.search;
     res.json({
       message: "error",
+      search: search,
     });
   }
 });

@@ -158,11 +158,11 @@ class ProductosService {
 
     const productos = [];
 
-    const categoriesId = resultados?.results[index]?.category_id;
+    const categoriesId = resultados?.results[1]?.category_id;
     const categories = await this.obtenerDatos(
       `https://api.mercadolibre.com/categories/${categoriesId}`
     );
-    const currencyId = resultados?.results[index]?.currency_id;
+    const currencyId = resultados?.results[1]?.currency_id;
     const currency = await this.obtenerDatos(
       `https://api.mercadolibre.com/currencies/${currencyId}`
     );
