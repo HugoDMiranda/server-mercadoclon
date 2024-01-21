@@ -10,7 +10,7 @@ class ProductosService {
     return data;
   }
 
-  //ITEMSSS
+  //ITEMS
 
   async buscar(url) {
     const limit = 12;
@@ -31,7 +31,6 @@ class ProductosService {
       productos.push({
         author: {
           name: resultados?.results[index]?.seller.nickname,
-          // lastname: String,
         },
         categories: categories?.path_from_root.map((category) => {
           return category.name;
@@ -49,7 +48,6 @@ class ProductosService {
             picture: resultados?.results[index]?.thumbnail,
             condition: resultados?.results[index]?.condition,
             free_shipping: resultados?.results[index]?.shipping.free_shipping,
-            // state_name: resultados?.results[index]?.address.state_name,
           },
         ],
       });
@@ -57,7 +55,7 @@ class ProductosService {
     return productos;
   }
 
-  //ITEMMMMM
+  //ITEM
 
   async buscarUno(url1, url2) {
     const data1 = await this.obtenerDatos(url1);
@@ -102,77 +100,6 @@ class ProductosService {
       }),
     };
     return producto;
-  }
-
-  //PRUEBA22222
-  async search(url) {
-    const limit = 12;
-    //const limit = 4;
-    const resultados = await this.obtenerDatos(url);
-
-    const productos = [];
-
-    const categoriesId = resultados?.results[1]?.category_id;
-    const categories = await this.obtenerDatos(
-      `https://api.mercadolibre.com/categories/${categoriesId}`
-    );
-    const currencyId = resultados?.results[1]?.currency_id;
-    const currency = await this.obtenerDatos(
-      `https://api.mercadolibre.com/currencies/${currencyId}`
-    );
-
-    // productos.push(categories, currency);
-    for (let index = 0; index < limit; index++) {
-      productos.push({
-        // author: {
-        //   name: resultados.results[index].seller.nickname,
-        //   lastname: String,
-        // },
-        // categories: categories.path_from_root.map((category) => {
-        //   return category.name;
-        // }),
-        // items: [
-        //   {
-        //     id: resultados.results[index].id,
-        //     title: resultados.results[index].title,
-        //     price: {
-        //       currency: currency.id,
-        //       amount: resultados.results[index].installments.amount,
-        //       decimals: currency.decimal_places,
-        //       price: resultados.results[index].price,
-        //     },
-        //     picture: resultados.results[index].thumbnail,
-        //     condition: resultados.results[index].condition,
-        //     free_shipping: resultados.results[index].shipping.free_shipping,
-        //     state_name: resultados.results[index].address.state_name,
-        //   },
-        // ],
-        author: {
-          name: resultados?.results[index]?.seller?.nickname,
-          // lastname: String,
-        },
-        categories: categories?.path_from_root.map((category) => {
-          return category.name;
-        }),
-        items: [
-          {
-            id: resultados?.results[index]?.id,
-            title: resultados?.results[index]?.title,
-            price: {
-              currency: currency.id,
-              amount: resultados?.results[index]?.installments.amount,
-              decimals: currency?.decimal_places,
-              price: resultados?.results[index]?.price,
-            },
-            picture: resultados?.results[index]?.thumbnail,
-            condition: resultados?.results[index]?.condition,
-            free_shipping: resultados?.results[index]?.shipping.free_shipping,
-            state_name: resultados?.results[index]?.address.state_name,
-          },
-        ],
-      });
-    }
-    return productos;
   }
 }
 
