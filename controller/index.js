@@ -13,8 +13,7 @@ class ProductosService {
   //ITEMS
 
   async buscar(url) {
-    const limit = 12;
-    //const limit = 4;
+    const limit = 24;
     const resultados = await this.obtenerDatos(url);
 
     const productos = [];
